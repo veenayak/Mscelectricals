@@ -1,0 +1,155 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/**
+ *
+ * @author winayak
+ */
+@WebServlet(urlPatterns = {"/LetterPadDetails"})
+public class LetterPadDetails extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+             String type = request.getParameter("type");
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/MSCELECTRICALS?useSSL = false","root","NovoDB123#$");  
+            int id  = Integer.parseInt(request.getParameter("id"));
+            HttpSession session = request.getSession(false);     
+            JSONArray list = new JSONArray();            
+
+            if(session.getAttribute("user")==null){
+                out.println(0);
+            }
+            else{
+                String query = "select * from letter_pad where id=?";
+                PreparedStatement ps = con.prepareStatement(query);  
+                ps.setInt(1, id);
+                try{
+                    ResultSet rs = ps.executeQuery();
+                    JSONObject obj = new JSONObject();
+                    while(rs.next()){                      
+                            obj.put("id", rs.getInt("id"));
+                            obj.put("date", rs.getDate("date"));
+                            obj.put("refno", rs.getString("ref_no"));
+                            obj.put("name", rs.getString("to_name"));
+                            obj.put("address", rs.getString("to_address"));
+                            obj.put("subject", rs.getString("subject"));
+                            obj.put("header", rs.getString("header"));
+                            obj.put("cday", rs.getString("completion_days"));
+                            obj.put("ovalid", rs.getString("offer_valid_days"));
+                            obj.put("total", rs.getFloat("total"));
+                        
+                    }                
+                    list.put(obj);                    
+                }
+                catch(Exception e){
+                    out.println(e.getMessage());                    
+                }
+                String query2 = "select * from letter_pad_items where letter_pad_id=?";
+                PreparedStatement ps2 = con.prepareStatement(query2);  
+                ps2.setInt(1, id);
+                try{
+                    ResultSet rs = ps2.executeQuery();
+                    JSONArray list2 = new JSONArray();            
+
+                    int count =0;
+                    while(rs.next()){       
+                        JSONObject obj = new JSONObject();
+                        count++;
+                        obj.put("sno", count);
+                        obj.put("name", rs.getString("name"));
+                        obj.put("code", rs.getInt("code"));
+                        obj.put("unit", rs.getString("unit"));
+                        obj.put("tax", rs.getInt("gst"));
+                        obj.put("rate", rs.getInt("rate"));
+                        obj.put("qty", rs.getInt("quantity"));
+                        obj.put("amt", rs.getInt("amount"));
+
+                        
+                        list2.put(obj);
+                    }        
+                    list.put(list2);
+                    out.println(list);
+                }   
+                catch(Exception e){
+                    out.println(e.getMessage());                    
+                }
+                finally{
+                    con.close();    
+                }  
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

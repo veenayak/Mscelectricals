@@ -1,0 +1,493 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 5 Jul, 2020, 4:34:58 PM
+    Author     : winayak
+*/
+*{
+    box-sizing: border-box;
+    font-family: monospace;
+}
+.fa.fa-trash,.fa.fa-close{
+    color: #d96c6c;
+}
+.fa.fa-check{
+    color: #799f79;
+}
+.fa.fa-edit{
+    color: #4551d5;
+}
+#home,#logout{
+    cursor: pointer;
+}
+#home{
+    margin-right: 10px;
+}
+body{
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+h1,h2,h3,h4,h5,h6{
+    letter-spacing: 1px;
+    color: #666;
+}
+button:hover{
+    background: #5659a5;
+}
+input:focus,select:focus{
+    border: 1px solid #7579de;
+}
+button{
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #7579de;
+    background: #7579de;
+    color: #fff;
+    outline: 0;
+    font-weight: bold;
+    font-size: 15px;
+}
+#close,#false,#close2,#new{
+    margin-top: 25px;
+    background: #f9f7f7;
+    border: 1px solid #dedede;
+    color: #666;
+}
+#save_edit_item,#new{
+    display: none;
+}
+input,select{
+    width: 100%;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    outline: 0;
+    padding: 10px;
+    background: #ffffff;
+    min-height: 40px;
+}
+label{
+    margin-bottom: 10px;
+    display: inline-block;
+}
+#login_div h2{
+    text-align: center;
+    margin-bottom: 30px;
+}
+#login_div{
+    max-width: 350px;
+    overflow: hidden;
+    padding: 20px 30px;
+    border-radius: 5px;
+    background: #f3f3f3;
+    min-height: 300px;
+    padding-bottom: 50px;
+    margin: auto;
+    position: absolute;
+    box-shadow: 0px 5px 10px #cacaca;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+#login_div img{    
+    width: 140px;
+    margin: auto;
+    display: block;
+    margin-bottom: 40px;
+}
+#login_div button{
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+}
+#login_div span{
+    color: #2146bf;
+    font-weight: bold;
+    margin-top: 40px;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+#login_div span:hover{
+    color: black;
+}
+#nav_div{
+    padding: 10px 15px;
+    float: left;
+    border-bottom: 1px solid #dedede;
+    width: 100%;
+    background: #ffffff;
+    z-index: 99999999;
+}
+#nav_div img{
+    width: 55px;
+    float: left;
+}
+#nav_div div:nth-child(2){
+    float: left;
+}
+#nav_div h2{
+    margin-top: 3px;
+    margin-left: 10px;
+    color: #2b49c4;
+    margin-bottom: 10px;
+}
+#nav_div span{
+    color: #2b49c4;
+    margin-left: 10px;
+}
+#logout_div{
+    float: right;
+    margin-top: 15px;
+}
+#logout_div i{
+    color: #2b49c4;
+    font-size: 25px;
+}
+#tabs_div{
+    width: 20%;
+    border-right: 1px solid #dedede;
+    float: left;
+    background: #f9f9f9;
+    overflow: hidden;
+    transition: 0.8s;
+    padding: 15px;
+}
+#tabs_div>span{
+    color: #2b49c4;
+    font-size: 25px;
+    float: right;
+    transition: 0.8s;
+    cursor: pointer;
+    padding: 15px 0;
+}
+.tabs_icon_inactive{
+    transform: rotateZ(-180deg);
+    margin: auto;    
+    text-align: center;
+    margin-right: 10px;
+}
+.tabs_div_inactive{
+    width: 80px!important;
+    display: inline!important;    
+}
+.tabs_inactive{
+    display: none!important;
+}
+#tabs2_div{
+    display: none;
+    margin-top: 0!important;
+}
+.tabs,.tabs2{
+    color: #666;
+    clear: both;
+    display: block;
+    font-size: 15px;
+    padding: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+}
+#tabs_div div{
+    float: left;
+    width: 100%;
+    margin-top: 15px;
+}
+.tabs2{
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    padding: 15px 0;
+}
+.tabs:hover,.tabs2:hover{
+    color: #7579de;
+}
+#main_div{
+    float: left;
+    width: 80%;
+    padding: 15px;
+}
+#main_div>div:first-child{
+    width: 50%;
+    float: left;
+}
+#main_div>div:first-child span{
+    display: inline-block;
+    float: left;
+    margin-top: 13px;
+    margin-left: 15px;
+    font-size: 15px;
+    border: 1px solid #dedede;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #4e53da;
+    font-weight: bold;
+    cursor: pointer;
+}
+#main_div>div:first-child span:hover{
+    background: #f7f7f7;
+    box-shadow: none;
+}
+#main_div h2{
+    display: inline-block;
+    margin: 15px 0;
+    font-size: 25px;
+    float: left;
+}
+#main_div .search{
+    float: right;
+    margin-left: 15px;
+    border-radius: 5px;
+    margin-top: 9px;
+}
+#search_div{
+    width: 50%;
+    float: left;       
+}
+#main_div input{
+    margin: 0;
+    width: 200px;
+    float: left;
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#main_div input:focus{
+    border: 1px solid #cacaca;
+    border-right:  0;
+}
+#main_div input+span{
+    border: 1px solid #cacaca;
+    border-left: 0;
+    float: left;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+}
+#main_div input+span i{
+    width: 50px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px!important;
+    height: 38px;
+    line-height: 2.2;
+}
+#main_content{    
+    margin-top: 17px;
+    width: 100%;
+    display: inline-block;
+    background: #ffffff;
+    box-shadow: 0px 5px 4px #dedede;
+    border-radius: 5px;
+    
+}
+#main_content tbody {
+    display:block;
+    height:65vh;
+    overflow-y:scroll;
+}
+#main_content thead, #main_content tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+}
+#main_content table,#modal_item table{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+#main_content td,#modal_item td{
+    border: 1px solid #dedede;    
+    padding: 10px 15px;
+}
+#main_content th,#modal_item th{
+    border: 1px solid #7579de;
+    padding: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 15px;
+    background: #7579de;
+}
+#modal,#modal_edit,#modal_item{
+    background: rgba(255,255,255,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display: none;
+}
+#modal_content{
+    background: #ffffff;
+    box-shadow: 0px 3px 5px #dedede;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 350px;
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    padding: 15px;
+    padding-bottom: 45px;
+}
+#modal_content1{
+    background: #ffffff;
+    border: 1px solid #dedede;
+    float: right;
+    width: 70%;
+    padding: 15px;
+    padding-bottom: 45px;
+    padding-top: 45px;
+    overflow-y: scroll;
+    z-index: 999999;
+    border-left: 0;
+}
+#modal_content2{
+    background: #ffffff; 
+    border: 1px solid #dedede;
+    float: right;
+    width: 30%;
+    z-index: -2;
+    border-radius: 10px;
+    padding: 15px;
+    padding-bottom: 45px;
+    border-right: 0;
+}
+#modal_content h2,#modal_content2 h2,#modal_content1 h2{
+    margin-bottom: 25px;
+}
+#empty_after{
+    width: 100%;
+    float: left;
+    margin: 0;
+    margin-bottom: 20px;
+    color: #ff5252;
+    padding-left: 10px;
+    margin-top: -10px;
+}
+table td span{
+    cursor:pointer;
+}
+table #dropdown{
+    position: absolute;
+    background: #ffffff;
+    width: auto;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+#dropdown a{
+    display: block;
+    min-width: 35px;    
+    padding: 10px 5px;
+    text-align: center;
+}
+#dropdown a i{
+    font-size: 18px;
+}
+#dropdown a:hover{
+    background: #f3f3f3;
+    border-radius: 5px;
+}
+#reverse_charge{
+    text-align: right;
+}
+table td span i{
+    font-size: 25px!important;
+}
+#confirm2{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,0.5);
+}
+#confirm2 div{
+    background: #ffffff;
+    box-shadow: 0px 3px 5px #dedede;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 350px;
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    padding: 15px;
+    line-height: 1.5;
+    padding-bottom: 40px;
+}
+#confirm2 button{
+    margin-top: 15px;
+}
+#confirm2 p{
+    font-size: 15px;
+}
+table span,table i,table a{
+    cursor: pointer;
+}
+#modal_content1::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#modal_content1::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+#modal_content1::-webkit-scrollbar-thumb {
+  background: #dadada;
+}
+
+/* Handle on hover */
+#modal_content1::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+#main_content tbody::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#main_content tbody::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+#main_content tbody::-webkit-scrollbar-thumb {
+  background: #dadada;
+}
+
+/* Handle on hover */
+#main_content tbody::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #dadada;
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
